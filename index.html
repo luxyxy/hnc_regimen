@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>頭頸部癌 化学療法レジメン集</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1c2128;
+    --bg4: #21262d;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.15);
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --text3: #6e7681;
+    --accent-blue: #388bfd;
+    --accent-blue-bg: rgba(56,139,253,0.1);
+    --accent-green: #3fb950;
+    --accent-green-bg: rgba(63,185,80,0.1);
+    --accent-red: #f85149;
+    --accent-red-bg: rgba(248,81,73,0.1);
+    --accent-amber: #d29922;
+    --accent-amber-bg: rgba(210,153,34,0.1);
+    --accent-purple: #bc8cff;
+    --accent-purple-bg: rgba(188,140,255,0.1);
+    --accent-teal: #39d353;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ヘッダー */
+  header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo-icon {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, #388bfd, #bc8cff);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; color: #fff;
+    flex-shrink: 0;
+  }
+  header h1 {
+    font-size: 15px; font-weight: 500;
+    color: var(--text);
+    flex: 1;
+  }
+  .version-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    background: var(--accent-blue-bg);
+    color: var(--accent-blue);
+    border: 1px solid rgba(56,139,253,0.3);
+    padding: 2px 8px;
+    border-radius: 12px;
+  }
+
+  /* レイアウト */
+  .layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: calc(100vh - 65px);
+  }
+
+  /* サイドバー */
+  .sidebar {
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    padding: 16px 0;
+    position: sticky;
+    top: 65px;
+    height: calc(100vh - 65px);
+    overflow-y: auto;
+  }
+  .sidebar-section {
+    padding: 0 12px 8px;
+  }
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 8px 4px;
+    display: block;
+  }
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 7px 10px;
+    border-radius: 6px;
+    border: none;
+    background: none;
+    color: var(--text2);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+    margin-bottom: 1px;
+  }
+  .nav-btn:hover { background: var(--bg4); color: var(--text); }
+  .nav-btn.active { background: var(--accent-blue-bg); color: var(--accent-blue); }
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* メインコンテンツ */
+  main {
+    padding: 24px;
+    max-width: 960px;
+  }
+
+  .regimen-panel { display: none; }
+  .regimen-panel.active { display: block; }
+
+  /* パネルヘッダー */
+  .panel-header {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .panel-header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .panel-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .panel-subtitle {
+    font-size: 13px;
+    color: var(--text2);
+    margin-top: 4px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+    border: 1px solid;
+  }
+  .tag-blue { background: var(--accent-blue-bg); color: var(--accent-blue); border-color: rgba(56,139,253,0.3); }
+  .tag-green { background: var(--accent-green-bg); color: var(--accent-green); border-color: rgba(63,185,80,0.3); }
+  .tag-red { background: var(--accent-red-bg); color: var(--accent-red); border-color: rgba(248,81,73,0.3); }
+  .tag-amber { background: var(--accent-amber-bg); color: var(--accent-amber); border-color: rgba(210,153,34,0.3); }
+  .tag-purple { background: var(--accent-purple-bg); color: var(--accent-purple); border-color: rgba(188,140,255,0.3); }
+
+  /* セクション */
+  .section { margin-bottom: 20px; }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* タイムライン投与表 */
+  .timeline-table {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+  }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-row.header-row {
+    background: var(--bg3);
+  }
+  .tl-day {
+    padding: 10px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent-blue);
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+  .tl-content {
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .tl-content .drug {
+    font-weight: 700;
+    color: var(--text);
+  }
+  .tl-content .dose {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--accent-amber);
+    font-weight: 500;
+  }
+  .tl-content .route {
+    color: var(--text2);
+    font-size: 12px;
+  }
+  .tl-content .note-inline {
+    font-size: 11.5px;
+    color: var(--text3);
+    margin-top: 2px;
+  }
+
+  /* カードグリッド */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .card-grid.col3 { grid-template-columns: 1fr 1fr 1fr; }
+  .card-grid.col1 { grid-template-columns: 1fr; }
+  .info-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .info-card.full { grid-column: 1 / -1; }
+  .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text2);
+    margin-bottom: 8px;
+    letter-spacing: 0.03em;
+  }
+  .card-body {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .card-body .mono {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--accent-amber);
+  }
+  .card-body .em { color: var(--accent-blue); font-weight: 500; }
+  .card-body .warn { color: var(--accent-red); font-weight: 500; }
+  .card-body .good { color: var(--accent-green); }
+
+  /* 副作用テーブル */
+  .ae-table {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+  }
+  .ae-row {
+    display: grid;
+    grid-template-columns: 150px 70px 1fr;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .ae-row:last-child { border-bottom: none; }
+  .ae-row.ae-header {
+    background: var(--bg3);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .ae-cell {
+    padding: 9px 14px;
+    font-size: 13px;
+    border-right: 1px solid var(--border);
+  }
+  .ae-cell:last-child { border-right: none; }
+  .ae-name { color: var(--text); font-weight: 500; }
+  .ae-freq {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    text-align: center;
+  }
+  .freq-high { color: var(--accent-red); }
+  .freq-mid { color: var(--accent-amber); }
+  .freq-low { color: var(--accent-green); }
+  .ae-manage { color: var(--text2); font-size: 12.5px; line-height: 1.6; }
+
+  /* 警告ボックス */
+  .alert-box {
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.7;
+    border: 1px solid;
+    margin-top: 16px;
+  }
+  .alert-red {
+    background: var(--accent-red-bg);
+    border-color: rgba(248,81,73,0.3);
+    color: #ffa198;
+  }
+  .alert-amber {
+    background: var(--accent-amber-bg);
+    border-color: rgba(210,153,34,0.3);
+    color: #e3b341;
+  }
+  .alert-blue {
+    background: var(--accent-blue-bg);
+    border-color: rgba(56,139,253,0.3);
+    color: #79c0ff;
+  }
+  .alert-title {
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  /* 投与基準チェックリスト */
+  .checklist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 12px;
+  }
+  .check-icon {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--accent-green-bg);
+    border: 1px solid rgba(63,185,80,0.4);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 9px;
+    color: var(--accent-green);
+  }
+  .check-item .mono { font-family: 'IBM Plex Mono', monospace; color: var(--accent-amber); font-size: 12px; }
+
+  /* 補液プロトコル */
+  .fluid-bar {
+    display: flex;
+    gap: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    height: 36px;
+    border: 1px solid var(--border);
+  }
+  .fluid-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    gap: 4px;
+  }
+  .fluid-pre { background: rgba(56,139,253,0.2); color: #79c0ff; flex: 2; }
+  .fluid-drug { background: rgba(248,81,73,0.2); color: #ffa198; flex: 3; }
+  .fluid-post { background: rgba(63,185,80,0.2); color: #7ee787; flex: 2; }
+
+  /* スクロールバー */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  /* 参照ボックス */
+  .ref-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width: 700px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; }
+    .card-grid { grid-template-columns: 1fr; }
+    .ae-row { grid-template-columns: 1fr; }
+    .checklist { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-icon">頭</div>
+  <h1>頭頸部癌 化学療法レジメン集 — 耳鼻科医向け実用版</h1>
+  <span class="version-badge">v2.0</span>
+</header>
+
+<div class="layout">
+
+<!-- サイドバー -->
+<nav class="sidebar">
+  <div class="sidebar-section">
+    <span class="sidebar-label">根治的治療</span>
+    <button class="nav-btn active" onclick="showPanel('cddp-rt')">
+      <span class="nav-dot" style="background:#388bfd"></span>CDDP + RT
+    </button>
+    <button class="nav-btn" onclick="showPanel('cbdca-rt')">
+      <span class="nav-dot" style="background:#3fb950"></span>CBDCA + RT
+    </button>
+    <button class="nav-btn" onclick="showPanel('cet-rt')">
+      <span class="nav-dot" style="background:#bc8cff"></span>Cetuximab + RT
+    </button>
+  </div>
+  <div class="sidebar-section">
+    <span class="sidebar-label">導入化学療法</span>
+    <button class="nav-btn" onclick="showPanel('tpf')">
+      <span class="nav-dot" style="background:#d29922"></span>TPF
+    </button>
+  </div>
+  <div class="sidebar-section">
+    <span class="sidebar-label">再発・転移</span>
+    <button class="nav-btn" onclick="showPanel('pembro')">
+      <span class="nav-dot" style="background:#f85149"></span>Pembrolizumab
+    </button>
+    <button class="nav-btn" onclick="showPanel('nivo')">
+      <span class="nav-dot" style="background:#f85149"></span>Nivolumab
+    </button>
+    <button class="nav-btn" onclick="showPanel('pf')">
+      <span class="nav-dot" style="background:#8b949e"></span>PF
+    </button>
+    <button class="nav-btn" onclick="showPanel('extreme')">
+      <span class="nav-dot" style="background:#bc8cff"></span>Extreme
+    </button>
+  </div>
+</nav>
+
+<!-- メインコンテンツ -->
+<main>
+
+<!-- ===== CDDP + RT ===== -->
+<div class="regimen-panel active" id="panel-cddp-rt">
+  <div class="panel-header">
+    <div class="panel-header-top">
+      <div>
+        <div class="panel-title">Cisplatin（CDDP）+ 放射線療法</div>
+        <div class="panel-subtitle">局所進行頭頸部扁平上皮癌の根治的同時化学放射線療法</div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">局所進行 Stage III–IVB</span>
+      <span class="tag tag-green">根治的CRT 第一選択</span>
+      <span class="tag tag-red">高用量 腎毒性・耳毒性</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">投与スケジュール（1サイクル＝21日）</div>
+    <div class="timeline-table">
+      <div class="tl-row">
+        <div class="tl-day">Day 1, 22, 43</div>
+        <div class="tl-content">
+          <span class="drug">Cisplatin</span> <span class="dose">100 mg/m²</span> <span class="route">IV 3時間以上（計3回）</span>
+          <div class="note-inline">各RT第1週に投与 ／ 放射線：70 Gy / 35分割 / 7週間（5日/週）と同時</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">補液プロトコル（各投与日）</div>
+    <div class="fluid-bar">
+      <div class="fluid-seg fluid-pre">投与前</div>
+      <div class="fluid-seg fluid-drug">CDDP 投与中</div>
+      <div class="fluid-seg fluid-post">投与後</div>
+    </div>
+    <div class="timeline-table">
+      <div class="tl-row">
+        <div class="tl-day">投与前</div>
+        <div class="tl-content">生食 <span class="dose">1,000 mL</span> + 20%マンニトール <span class="dose">200 mL</span>（20分）→ 尿量確認</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">投与中</div>
+        <div class="tl-content">CDDP in 生食 <span class="dose">500 mL</span>（3時間以上）</div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">投与後</div>
+        <div class="tl-content">生食 <span class="dose">1,000–2,000 mL</span>（4時間以上）<br>
+          <span class="note-inline">総補液量 ≥ 3,000 mL / 尿量 &gt; 100 mL/hr を維持 / 電解質（K, Mg）補正</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">前投薬・制吐（HEC 3剤法）</div>
+    <div class="card-grid">
+      <div class="info-card">
+        <div class="card-title">当日（投与30分前）</div>
+        <div class="card-body">
+          5-HT3拮抗薬（グラニセトロン <span class="mono">3 mg IV</span> 等）<br>
+          NK1受容体拮抗薬（アプレピタント <span class="mono">125 mg 経口</span>）<br>
+          デキサメタゾン <span class="mono">9.9 mg IV</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title">Day 2–3（経口継続）</div>
+        <div class="card-body">
+          アプレピタント <span class="mono">80 mg/日 経口</span><br>
+          デキサメタゾン <span class="mono">8 mg/日 経口</span><br>
+          5-HT3拮抗薬 継続 or 適宜追加
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">投与可否チェックリスト（毎コース前）</div>
+    <div class="checklist">
+      <div class="check-item"><div class="check-icon">✓</div>CCr <span class="mono">≥ 60 mL/min</span></div>
+      <div class="check-item"><div class="check-icon">✓</div>PS <span class="mono">0–1</span></div>
+      <div class="check-item"><div class="check-icon">✓</div>WBC <span class="mono">≥ 3,000 /µL</span></div>
+      <div class="check-item"><div class="check-icon">✓</div>Plt <span class="mono">≥ 100,000 /µL</span></div>
+      <div class="check-item"><div class="check-icon">✓</div>Cr・電解質（BUN, Na, K, Mg）正常範囲</div>
+      <div class="check-item"><div class="check-icon">✓</div>聴力障害・耳鳴りなし</div>
+      <div class="check-item"><div class="check-icon">✓</div>末梢神経障害なし</div>
+      <div class="check-item"><div class="check-icon">✓</div>感染兆候なし</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">主な副作用とマネジメント</div>
+    <div class="ae-table">
+      <div class="ae-row ae-header">
+        <div class="ae-cell">副作用</div>
+        <div class="ae-cell" style="text-align:center">頻度</div>
+        <div class="ae-cell">対応・モニタリング</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">腎毒性（急性）</div>
+        <div class="ae-cell ae-freq freq-high">高</div>
+        <div class="ae-cell ae-manage">投与前後の十分な補液・利尿。CCrが60未満なら次コース延期または中止。不可逆性のリスクあり。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">悪心・嘔吐</div>
+        <div class="ae-cell ae-freq freq-high">高（HEC）</div>
+        <div class="ae-cell ae-manage">3剤制吐法（5-HT3＋NK1＋デキサ）必須。投与後3日間の経口制吐薬継続。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">口腔粘膜炎</div>
+        <div class="ae-cell ae-freq freq-high">高（RTとの相乗）</div>
+        <div class="ae-cell ae-manage">含嗽励行、口腔ケア。Grade 3以上はRT中断・経管栄養検討。疼痛管理（オピオイド考慮）。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">聴力障害（耳毒性）</div>
+        <div class="ae-cell ae-freq freq-mid">10–30%</div>
+        <div class="ae-cell ae-manage"><span style="color:var(--accent-red);font-weight:500">不可逆性。</span>投与前にオーディオグラム。高音域から低下。耳鼻科医として特に注意。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">電解質異常（低Mg、低K）</div>
+        <div class="ae-cell ae-freq freq-high">高</div>
+        <div class="ae-cell ae-manage">毎コース前に測定・補正。低Mg持続 → 補充継続（硫酸Mg IV/経口）。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">骨髄抑制</div>
+        <div class="ae-cell ae-freq freq-mid">中等度</div>
+        <div class="ae-cell ae-manage">血算は週1回モニタリング。発熱性好中球減少（FN）対応を準備。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">末梢神経障害</div>
+        <div class="ae-cell ae-freq freq-mid">累積毒性</div>
+        <div class="ae-cell ae-manage">手足のしびれ・疼痛。Grade 2以上は次コース延期または減量。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">嚥下障害（RT）</div>
+        <div class="ae-cell ae-freq freq-high">高（放射線起因）</div>
+        <div class="ae-cell ae-manage">栄養士・言語聴覚士と連携。体重減少に注意。経管栄養（PEG or NGチューブ）を早期検討。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box alert-red">
+    <div class="alert-title">⚠ 耳鼻科医として特に注意</div>
+    Cisplatinの耳毒性（高音域難聴・耳鳴り）は不可逆。投与前に必ず純音聴力検査を施行し、ベースライン記録。投与コースごとに症状確認を。Grade 2以上の難聴では次コース継続を慎重に判断すること。
+  </div>
+  <div class="ref-box">Evidence: Adelstein DJ et al. J Clin Oncol 2003 ／ Forastiere AA et al. NEJM 2003</div>
+</div>
+
+<!-- ===== CBDCA + RT ===== -->
+<div class="regimen-panel" id="panel-cbdca-rt">
+  <div class="panel-header">
+    <div class="panel-header-top">
+      <div>
+        <div class="panel-title">Carboplatin（CBDCA）+ 放射線療法</div>
+        <div class="panel-subtitle">CDDP不適例の代替同時化学放射線療法</div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-amber">CDDP不適例 代替</span>
+      <span class="tag tag-green">腎毒性・耳毒性 軽減</span>
+      <span class="tag tag-blue">CCr ≥ 40 mL/min</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">投与スケジュール（RT期間中、毎週1回）</div>
+    <div class="timeline-table">
+      <div class="tl-row">
+        <div class="tl-day">毎週 Day 1<br>（×7週）</div>
+        <div class="tl-content">
+          <span class="drug">Carboplatin</span> <span class="dose">AUC 1.5–2</span> <span class="route">IV（30–60分）</span>
+          <div class="note-inline">放射線：70 Gy / 35分割 / 7週間と同時</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">用量計算（必須：Calvert式）</div>
+    <div class="info-card full">
+      <div class="card-title">Calvert式</div>
+      <div class="card-body">
+        <span class="mono">用量 (mg) = AUC × (GFR + 25)</span><br>
+        GFR算出：Cockcroft-Gault式 <span class="mono">= (140－年齢) × 体重(kg) / (72 × Cr) [女性×0.85]</span><br>
+        例：AUC 2、GFR 60 → <span class="mono">2 × (60+25) = 170 mg</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">投与可否チェックリスト（各週）</div>
+    <div class="checklist">
+      <div class="check-item"><div class="check-icon">✓</div>CCr <span class="mono">≥ 40 mL/min</span></div>
+      <div class="check-item"><div class="check-icon">✓</div>Plt <span class="mono">≥ 100,000 /µL</span></div>
+      <div class="check-item"><div class="check-icon">✓</div>WBC <span class="mono">≥ 3,000 /µL</span></div>
+      <div class="check-item"><div class="check-icon">✓</div>PS <span class="mono">0–2</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">主な副作用とマネジメント</div>
+    <div class="ae-table">
+      <div class="ae-row ae-header">
+        <div class="ae-cell">副作用</div>
+        <div class="ae-cell" style="text-align:center">頻度</div>
+        <div class="ae-cell">対応・モニタリング</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">血小板減少</div>
+        <div class="ae-cell ae-freq freq-high">高（主毒性）</div>
+        <div class="ae-cell ae-manage">週1回血算必須。Plt &lt; 50,000 → 投与中止検討。出血傾向・点状出血に注意。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">白血球・好中球減少</div>
+        <div class="ae-cell ae-freq freq-mid">中等度</div>
+        <div class="ae-cell ae-manage">発熱時はFNプロトコル対応。G-CSF使用を状況に応じ検討。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">悪心・嘔吐</div>
+        <div class="ae-cell ae-freq freq-mid">中（MEC）</div>
+        <div class="ae-cell ae-manage">5-HT3拮抗薬＋デキサメタゾン（2剤法）で対応可。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">口腔粘膜炎</div>
+        <div class="ae-cell ae-freq freq-high">高（RT相乗）</div>
+        <div class="ae-cell ae-manage">含嗽・口腔ケア。CDDPより軽度な傾向だが油断しない。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">腎毒性</div>
+        <div class="ae-cell ae-freq freq-low">低（CDDPより軽）</div>
+        <div class="ae-cell ae-manage">定期的な腎機能モニタリングは継続。補液はCDDPほど厳密でなくてよい。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">アレルギー反応</div>
+        <div class="ae-cell ae-freq freq-low">累積（3コース以降↑）</div>
+        <div class="ae-cell ae-manage">特に白金製剤反復時に注意。蕁麻疹・血圧低下時は中止しアレルギー対応。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box alert-amber">
+    <div class="alert-title">⚠ ポイント</div>
+    CDDPとの最大の違いは骨髄抑制（特に血小板）が主毒性である点。腎・聴力毒性は軽減されるが、毎週の血算確認を怠らないこと。Plt &lt; 75,000 では減量、&lt; 50,000 では投与中止を検討。
+  </div>
+  <div class="ref-box">Evidence: Denis F et al. J Clin Oncol 2004 ／ NCCN Guidelines Head and Neck Cancers</div>
+</div>
+
+<!-- ===== Cetuximab + RT ===== -->
+<div class="regimen-panel" id="panel-cet-rt">
+  <div class="panel-header">
+    <div class="panel-header-top">
+      <div>
+        <div class="panel-title">Cetuximab（アービタックス）+ 放射線療法</div>
+        <div class="panel-subtitle">局所進行頭頸部扁平上皮癌 — EGFR阻害による根治的治療</div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-purple">EGFR 阻害薬</span>
+      <span class="tag tag-amber">CDDP不適または腎機能不良</span>
+      <span class="tag tag-blue">負荷→維持 2段階投与</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">投与スケジュール</div>
+    <div class="timeline-table">
+      <div class="tl-row">
+        <div class="tl-day">Day −7<br>（RT開始1週前）</div>
+        <div class="tl-content">
+          <span class="drug">Cetuximab 負荷用量</span> <span class="dose">400 mg/m²</span> <span class="route">IV 120分</span>
+          <div class="note-inline">前投薬（抗ヒスタミン薬 + デキサメタゾン IV）は投与30分前必須</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">毎週<br>（×7回）</div>
+        <div class="tl-content">
+          <span class="drug">Cetuximab 維持用量</span> <span class="dose">250 mg/m²</span> <span class="route">IV 60分</span>
+          <div class="note-inline">RT照射の1時間以上前に投与完了させる</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">RT（同時）</div>
+        <div class="tl-content">
+          放射線 <span class="dose">70 Gy / 35分割</span> — 7週間（5日/週）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">インフュージョンリアクション対応（必ず準備）</div>
+    <div class="card-grid">
+      <div class="info-card">
+        <div class="card-title">投与前 ルーティン準備</div>
+        <div class="card-body">
+          抗ヒスタミン薬（d-クロルフェニラミン等）IV<br>
+          デキサメタゾン <span class="mono">8 mg IV</span><br>
+          エピネフリン・気道管理セット 常備<br>
+          投与開始後30分はスタッフ待機
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title">Grade 3–4 反応時の対応</div>
+        <div class="card-body">
+          <span class="warn">直ちに投与中止</span><br>
+          エピネフリン <span class="mono">0.3 mg IM（大腿外側）</span><br>
+          気道確保・補液・モニタリング<br>
+          <span style="color:var(--accent-red)">再投与は原則禁忌</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">主な副作用とマネジメント</div>
+    <div class="ae-table">
+      <div class="ae-row ae-header">
+        <div class="ae-cell">副作用</div>
+        <div class="ae-cell" style="text-align:center">頻度</div>
+        <div class="ae-cell">対応・モニタリング</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">ざ瘡様皮疹</div>
+        <div class="ae-cell ae-freq freq-high">80–90%（ほぼ必発）</div>
+        <div class="ae-cell ae-manage">Grade 1–2：保湿クリーム、テトラサイクリン系抗菌薬（ミノサイクリン100mg/日）予防投与推奨。Grade 3：投与延期+全身抗菌薬。皮疹の強さは効果と相関する場合あり。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">低マグネシウム血症</div>
+        <div class="ae-cell ae-freq freq-high">高（累積）</div>
+        <div class="ae-cell ae-manage"><span style="color:var(--accent-red)">毎週Mg測定必須。</span> Mg &lt; 0.5 mmol/L → IV補充（硫酸Mg 1g IV）。治療終了後8週以上持続することあり。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">インフュージョンリアクション</div>
+        <div class="ae-cell ae-freq freq-mid">Grade 3–4: 約3%</div>
+        <div class="ae-cell ae-manage">初回が最多。悪寒・蕁麻疹・血圧低下・気管支痙攣。前投薬と緊急対応準備（上記参照）。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">口腔粘膜炎</div>
+        <div class="ae-cell ae-freq freq-high">高（RT相乗）</div>
+        <div class="ae-cell ae-manage">含嗽・口腔ケア強化。栄養管理（経管栄養検討）。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">爪囲炎・乾燥</div>
+        <div class="ae-cell ae-freq freq-mid">30–50%</div>
+        <div class="ae-cell ae-manage">保湿ケア。抗菌薬外用（テトラサイクリン軟膏）。悪化時は皮膚科紹介。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">低カリウム血症</div>
+        <div class="ae-cell ae-freq freq-mid">Mgに続発</div>
+        <div class="ae-cell ae-manage">Mgを補正してもKが上がらないことあり。電解質全体を確認して補正。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box alert-amber">
+    <div class="alert-title">⚠ 耳鼻科医 実践ポイント</div>
+    Cetuximabの皮疹マネジメントは投与継続に直結する。皮膚科との早期連携を。Mg低下は心電図異常（QT延長）にもつながるため、症状だけでなく検査値で管理。CDDPと異なり腎・耳毒性が少ないのが最大のメリット。
+  </div>
+  <div class="ref-box">Evidence: Bonner JA et al. NEJM 2006 ／ Lancet Oncol 2010</div>
+</div>
+
+<!-- ===== TPF ===== -->
+<div class="regimen-panel" id="panel-tpf">
+  <div class="panel-header">
+    <div class="panel-header-top">
+      <div>
+        <div class="panel-title">TPF（Docetaxel + Cisplatin + 5-FU）</div>
+        <div class="panel-subtitle">局所進行頭頸部癌 — 導入化学療法（3コース後に根治的治療へ）</div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-amber">導入化学療法</span>
+      <span class="tag tag-red">強毒性 G-CSF必須</span>
+      <span class="tag tag-blue">3コース → 根治的CRT/手術</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">1コース（21日間）投与スケジュール</div>
+    <div class="timeline-table">
+      <div class="tl-row">
+        <div class="tl-day">Day 1</div>
+        <div class="tl-content">
+          <span class="drug">Docetaxel</span> <span class="dose">75 mg/m²</span> <span class="route">IV 1時間</span>
+          <div class="note-inline">→ 終了後に Cisplatin 開始（順序厳守：DTX→CDDP→5-FU）</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Day 1</div>
+        <div class="tl-content">
+          <span class="drug">Cisplatin</span> <span class="dose">75 mg/m²</span> <span class="route">IV 1–3時間</span>
+          <div class="note-inline">十分な補液（生食 2,000 mL以上）+ マンニトール利尿 / 尿量 &gt; 100 mL/hr</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Day 1–5</div>
+        <div class="tl-content">
+          <span class="drug">5-FU</span> <span class="dose">750 mg/m²/日</span> <span class="route">持続点滴（24時間 × 5日）CVカテーテル必須</span>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Day 2–14</div>
+        <div class="tl-content">
+          <span class="drug">G-CSF</span> <span class="route">予防的投与（フィルグラスチム/ペグフィルグラスチム）— 必須</span>
+          <div class="note-inline">FNリスク ≥ 20% のため省略不可</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Day 22, 43</div>
+        <div class="tl-content">次コース開始（毒性・血算確認後）— 計3コース</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Docetaxel前投薬（必須・3日間）</div>
+    <div class="info-card full">
+      <div class="card-title">デキサメタゾン経口投与</div>
+      <div class="card-body">
+        デキサメタゾン <span class="mono">8 mg 経口 1日2回</span> × 3日間<br>
+        タイミング：DTX投与 <span class="em">前日・当日・翌日</span>（アレルギー反応・体液貯留予防）
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">毒性による用量調整基準</div>
+    <div class="card-grid">
+      <div class="info-card">
+        <div class="card-title">減量基準（75 → 60 mg/m²）</div>
+        <div class="card-body">
+          <span class="warn">Grade 4 好中球減少 &gt; 7日</span><br>
+          <span class="warn">発熱性好中球減少症（FN）</span><br>
+          <span class="warn">Grade 3–4 非血液毒性</span><br>
+          DTXおよびCDDPを同時に減量
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title">中止基準</div>
+        <div class="card-body">
+          <span class="warn">2回目減量後も毒性が持続</span><br>
+          CCr &lt; 50 mL/min（CDDP中止、CBDCAへ変更検討）<br>
+          Grade 4 非血液毒性（治癒不能）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">主な副作用とマネジメント</div>
+    <div class="ae-table">
+      <div class="ae-row ae-header">
+        <div class="ae-cell">副作用</div>
+        <div class="ae-cell" style="text-align:center">頻度</div>
+        <div class="ae-cell">対応・モニタリング</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">発熱性好中球減少症</div>
+        <div class="ae-cell ae-freq freq-high">20–30%</div>
+        <div class="ae-cell ae-manage">G-CSF予防的投与必須。発熱（≥ 38℃）＋好中球 &lt; 500 → 緊急入院・広域抗菌薬。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">脱毛</div>
+        <div class="ae-cell ae-freq freq-high">90%以上</div>
+        <div class="ae-cell ae-manage">事前に患者説明。可逆性（治療終了後3–6か月で回復）。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">悪心・嘔吐</div>
+        <div class="ae-cell ae-freq freq-high">高（CDDPによる）</div>
+        <div class="ae-cell ae-manage">HEC 3剤制吐法。5-FU持続期間中も経口制吐薬継続。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">口腔粘膜炎・下痢</div>
+        <div class="ae-cell ae-freq freq-high">30–50%</div>
+        <div class="ae-cell ae-manage">含嗽・口腔ケア。下痢はロペラミド等で対症。Grade 3以上は次コース延期。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">体液貯留（浮腫）</div>
+        <div class="ae-cell ae-freq freq-mid">DTX累積毒性</div>
+        <div class="ae-cell ae-manage">デキサメタゾン前投薬で軽減。体重を毎コース記録。悪化時は利尿薬。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">腎毒性（CDDP）</div>
+        <div class="ae-cell ae-freq freq-mid">中等度</div>
+        <div class="ae-cell ae-manage">補液厳守。TPFではCDDP 75 mg/m²（100 mg/m²より低用量）。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">末梢神経障害</div>
+        <div class="ae-cell ae-freq freq-mid">DTX+CDDP累積</div>
+        <div class="ae-cell ae-manage">手足のしびれ・疼痛。Grade 2以上 → 次コース延期・減量検討。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box alert-red">
+    <div class="alert-title">⚠ 実施上の必須事項</div>
+    CVカテーテルは5-FU持続投与開始前に必ず留置・確認。G-CSFなしでTPFは実施不可（FN死亡リスク）。導入化学療法の効果判定（3コース後CT/MRI）を経て根治的CRTまたは手術へ移行する計画を事前に確認。
+  </div>
+  <div class="ref-box">Evidence: Posner MR et al. NEJM 2007 (TAX 324) ／ Vermorken JB et al. NEJM 2007 (TAX 323)</div>
+</div>
+
+<!-- ===== Pembrolizumab ===== -->
+<div class="regimen-panel" id="panel-pembro">
+  <div class="panel-header">
+    <div class="panel-header-top">
+      <div>
+        <div class="panel-title">Pembrolizumab（キイトルーダ）</div>
+        <div class="panel-subtitle">再発・転移性頭頸部扁平上皮癌（R/M HNSCC）— 1次・2次治療以降</div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-red">PD-1 阻害薬</span>
+      <span class="tag tag-green">1次治療：単剤または PF 併用</span>
+      <span class="tag tag-purple">PD-L1 CPS 測定必須</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">レジメン選択フロー</div>
+    <div class="card-grid col1">
+      <div class="info-card">
+        <div class="card-title">1次治療（KEYNOTE-048 ベース）</div>
+        <div class="card-body">
+          <span class="em">CPS ≥ 20</span>：Pembrolizumab 単剤 推奨（OS最大ベネフィット）<br>
+          <span class="em">CPS ≥ 1</span>：Pembrolizumab 単剤 または PF＋Pembro 併用<br>
+          <span style="color:var(--text2)">CPS &lt; 1</span>：PF＋Pembro 併用（単剤は推奨されない）<br><br>
+          2次治療以降：PD-L1発現問わず使用可
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">投与スケジュール</div>
+    <div class="timeline-table">
+      <div class="tl-row">
+        <div class="tl-day">単剤</div>
+        <div class="tl-content">
+          <span class="drug">Pembrolizumab</span> <span class="dose">200 mg</span> <span class="route">IV 30分 Q3W</span><br>
+          または <span class="dose">400 mg</span> <span class="route">IV 30分 Q6W</span>（最長2年 / 35コース）
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">PF 併用<br>（Day 1）</div>
+        <div class="tl-content">
+          <span class="drug">Pembrolizumab</span> <span class="dose">200 mg</span> IV 30分<br>
+          → <span class="drug">Cisplatin</span> <span class="dose">100 mg/m²</span> IV（または CBDCA AUC 5）<br>
+          → <span class="drug">5-FU</span> <span class="dose">1,000 mg/m²/日</span> 持続点滴 Day 1–4<br>
+          <div class="note-inline">Q3W × 最大6コース → Pembrolizumab 単剤維持（病勢進行まで）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">irAE モニタリング（定期検査）</div>
+    <div class="card-grid">
+      <div class="info-card">
+        <div class="card-title">各コース前 必須検査</div>
+        <div class="card-body">
+          甲状腺機能（TSH, FT4）<br>
+          肝機能（AST, ALT, T-Bil）<br>
+          副腎機能（ACTH, コルチゾール：疑い時）<br>
+          血算・腎機能<br>
+          胸部X-P or CT（肺炎疑い時）
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title">irAE Grade 別対応</div>
+        <div class="card-body">
+          <span class="good">Grade 1</span>：継続、対症療法<br>
+          <span class="em">Grade 2</span>：投与保留 + PSL <span class="mono">0.5–1 mg/kg/日</span><br>
+          <span class="warn">Grade 3</span>：投与中止 + PSL <span class="mono">1–2 mg/kg/日</span><br>
+          <span style="color:var(--accent-red)">Grade 4</span>：永続的中止 + 緊急ステロイド大量
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">主な副作用（irAE 中心）とマネジメント</div>
+    <div class="ae-table">
+      <div class="ae-row ae-header">
+        <div class="ae-cell">副作用</div>
+        <div class="ae-cell" style="text-align:center">頻度</div>
+        <div class="ae-cell">対応・モニタリング</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">甲状腺機能異常</div>
+        <div class="ae-cell ae-freq freq-high">10–20%</div>
+        <div class="ae-cell ae-manage">甲状腺機能低下（多い）→ レボチロキシン補充。亢進 → βブロッカー。ステロイドは通常不要。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">免疫性肺炎</div>
+        <div class="ae-cell ae-freq freq-mid">3–5%（Grade 3+: 1–2%）</div>
+        <div class="ae-cell ae-manage"><span class="warn">重篤化リスク高。</span>呼吸困難・乾性咳嗽時はCT即施行。Grade 2以上 → 投与中止＋PSL 1–2 mg/kg。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">免疫性肝炎</div>
+        <div class="ae-cell ae-freq freq-mid">5–10%</div>
+        <div class="ae-cell ae-manage">AST/ALT上昇。Grade 2以上 → 投与保留＋PSL。Grade 3以上 → 消化器科紹介。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">皮膚毒性（皮疹・掻痒）</div>
+        <div class="ae-cell ae-freq freq-high">20–30%</div>
+        <div class="ae-cell ae-manage">保湿・ステロイド外用。重症例（Stevens-Johnson）は即時中止・皮膚科緊急紹介。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">免疫性腸炎・下痢</div>
+        <div class="ae-cell ae-freq freq-mid">10–15%</div>
+        <div class="ae-cell ae-manage">血便・頻回下痢はGrade確認。Grade 2以上 → 投与保留＋ステロイド。内視鏡検討。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">副腎不全・下垂体炎</div>
+        <div class="ae-cell ae-freq freq-low">1–3%</div>
+        <div class="ae-cell ae-manage">倦怠感・低血圧・低Na。疑い時はACTH・コルチゾール測定。ヒドロコルチゾン補充。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">1型糖尿病</div>
+        <div class="ae-cell ae-freq freq-low">&lt; 1%（重篤）</div>
+        <div class="ae-cell ae-manage">劇症型糖尿病として発症。高血糖・ケトアシドーシス。インスリン緊急投与。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box alert-blue">
+    <div class="alert-title">ℹ 投与前の必須確認</div>
+    PD-L1 CPS（Combined Positive Score）を病理部門で確認。活動性自己免疫疾患・全身性ステロイド投与中（PSL換算 &gt; 10 mg/日）は原則禁忌。間質性肺炎の既往があれば慎重適応（呼吸器科と協議）。
+  </div>
+  <div class="ref-box">Evidence: Burtness B et al. Lancet 2019 (KEYNOTE-048)</div>
+</div>
+
+<!-- ===== Nivolumab ===== -->
+<div class="regimen-panel" id="panel-nivo">
+  <div class="panel-header">
+    <div class="panel-header-top">
+      <div>
+        <div class="panel-title">Nivolumab（オプジーボ）</div>
+        <div class="panel-subtitle">再発・転移性頭頸部扁平上皮癌 — 白金製剤治療後（2次治療以降）</div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-red">PD-1 阻害薬</span>
+      <span class="tag tag-amber">2次治療以降</span>
+      <span class="tag tag-green">PD-L1 発現非依存</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">投与スケジュール</div>
+    <div class="timeline-table">
+      <div class="tl-row">
+        <div class="tl-day">Q2W</div>
+        <div class="tl-content">
+          <span class="drug">Nivolumab</span> <span class="dose">240 mg</span> <span class="route">IV 30分 — 2週毎</span>
+          <div class="note-inline">または 3 mg/kg IV Q2W（どちらでも可）</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Q4W</div>
+        <div class="tl-content">
+          <span class="drug">Nivolumab</span> <span class="dose">480 mg</span> <span class="route">IV 30分 — 4週毎</span>
+          <div class="note-inline">フラット用量（利便性重視の場合）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Pembrolizumabとの比較</div>
+    <div class="card-grid">
+      <div class="info-card">
+        <div class="card-title">Nivolumab の特徴</div>
+        <div class="card-body">
+          PD-L1発現 <span class="good">非依存</span>（測定不要）<br>
+          CheckMate 141でOS改善（vs 化学療法）<br>
+          2週毎または4週毎の選択肢あり
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="card-title">irAE プロファイル</div>
+        <div class="card-body">
+          Pembrolizumabとほぼ同様<br>
+          甲状腺・肺・肝・皮膚・消化管<br>
+          モニタリング・対応は同等
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">投与前・各コース前チェック</div>
+    <div class="checklist">
+      <div class="check-item"><div class="check-icon">✓</div>血算・肝腎機能</div>
+      <div class="check-item"><div class="check-icon">✓</div>TSH・FT4（甲状腺）</div>
+      <div class="check-item"><div class="check-icon">✓</div>胸部X-P（肺炎スクリーニング）</div>
+      <div class="check-item"><div class="check-icon">✓</div>自己免疫疾患の有無確認</div>
+      <div class="check-item"><div class="check-icon">✓</div>ステロイド全身投与中でないか</div>
+      <div class="check-item"><div class="check-icon">✓</div>irAE症状の問診（皮疹・咳嗽・下痢）</div>
+    </div>
+  </div>
+
+  <div class="alert-box alert-blue">
+    <div class="alert-title">ℹ CheckMate 141 試験</div>
+    白金製剤不応後のR/M HNSCCに対し、Nivolumab単剤がOS中央値7.5か月（vs 化学療法5.1か月）を達成。PD-L1発現問わずベネフィット。
+  </div>
+  <div class="ref-box">Evidence: Ferris RL et al. NEJM 2016 (CheckMate 141)</div>
+</div>
+
+<!-- ===== PF ===== -->
+<div class="regimen-panel" id="panel-pf">
+  <div class="panel-header">
+    <div class="panel-header-top">
+      <div>
+        <div class="panel-title">PF（Cisplatin + 5-FU）</div>
+        <div class="panel-subtitle">再発・転移性頭頸部癌 — 化学療法基盤（Extreme/KEYNOTE-048の骨格）</div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-blue">再発・転移</span>
+      <span class="tag tag-amber">Extreme/Pembroと組み合わせで使用が主流</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">1コース（21日間）投与スケジュール</div>
+    <div class="timeline-table">
+      <div class="tl-row">
+        <div class="tl-day">Day 1</div>
+        <div class="tl-content">
+          <span class="drug">Cisplatin</span> <span class="dose">100 mg/m²</span> <span class="route">IV 2–3時間</span>
+          <div class="note-inline">補液：生食 3,000 mL以上 / マンニトール利尿 / 尿量 &gt; 100 mL/hr</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Day 1–4</div>
+        <div class="tl-content">
+          <span class="drug">5-FU</span> <span class="dose">1,000 mg/m²/日</span> <span class="route">持続点滴（24時間 × 4日）CVカテーテル必須</span>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Day 22〜</div>
+        <div class="tl-content">次コース開始（効果確認・毒性許容範囲で継続）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">主な副作用とマネジメント</div>
+    <div class="ae-table">
+      <div class="ae-row ae-header">
+        <div class="ae-cell">副作用</div>
+        <div class="ae-cell" style="text-align:center">頻度</div>
+        <div class="ae-cell">対応・モニタリング</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">悪心・嘔吐</div>
+        <div class="ae-cell ae-freq freq-high">高（HEC）</div>
+        <div class="ae-cell ae-manage">HEC 3剤制吐法必須。5-FU持続期間中も経口制吐薬継続。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">口腔粘膜炎</div>
+        <div class="ae-cell ae-freq freq-high">30–50%</div>
+        <div class="ae-cell ae-manage">含嗽・口腔ケア。Grade 3以上 → 経管栄養検討・次コース延期。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">腎毒性</div>
+        <div class="ae-cell ae-freq freq-high">高（CDDP）</div>
+        <div class="ae-cell ae-manage">十分な補液。各コース前CCr確認。CCr &lt; 60 → 減量またはCBDCA変更。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">骨髄抑制</div>
+        <div class="ae-cell ae-freq freq-mid">中等度</div>
+        <div class="ae-cell ae-manage">血算定期確認。FN時は広域抗菌薬。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">5-FU心毒性</div>
+        <div class="ae-cell ae-freq freq-low">1–3%（重篤）</div>
+        <div class="ae-cell ae-manage">胸痛・心電図変化時は即中止し循環器科へ。DPD欠損患者では重篤化。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">手足症候群（5-FU）</div>
+        <div class="ae-cell ae-freq freq-mid">持続投与で増加</div>
+        <div class="ae-cell ae-manage">保湿ケア。Grade 2以上 → 次コース減量検討。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box alert-amber">
+    <div class="alert-title">⚠ 投与前 DPD 欠損確認</div>
+    DPD（dihydropyrimidine dehydrogenase）酵素欠損患者では5-FUにより重篤・致死的毒性のリスク。DPYD遺伝子多型検査（可能な施設では）を事前に検討。
+  </div>
+  <div class="ref-box">Evidence: Vermorken JB et al. NEJM 2008 (EXTREME) ／ Burtness B et al. Lancet 2019 (KEYNOTE-048)</div>
+</div>
+
+<!-- ===== Extreme ===== -->
+<div class="regimen-panel" id="panel-extreme">
+  <div class="panel-header">
+    <div class="panel-header-top">
+      <div>
+        <div class="panel-title">Extreme レジメン（Cetuximab + CDDP/CBDCA + 5-FU）</div>
+        <div class="panel-subtitle">再発・転移性頭頸部扁平上皮癌 — 1次治療（EXTREME試験）</div>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-purple">EGFR + 細胞傷害性</span>
+      <span class="tag tag-blue">再発・転移 1次治療</span>
+      <span class="tag tag-amber">Pembro台頭で位置付け変化中</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">1コース（21日間）投与スケジュール（最大6コース）</div>
+    <div class="timeline-table">
+      <div class="tl-row">
+        <div class="tl-day">Day 1<br>（初回のみ）</div>
+        <div class="tl-content">
+          <span class="drug">Cetuximab 負荷</span> <span class="dose">400 mg/m²</span> <span class="route">IV 120分</span>
+          <div class="note-inline">前投薬（抗ヒスタミン薬＋デキサ）30分前必須 → 観察30分後にCDDP開始</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Day 1（Q3W）</div>
+        <div class="tl-content">
+          <span class="drug">Cisplatin</span> <span class="dose">100 mg/m²</span> IV（または <span class="drug">CBDCA</span> <span class="dose">AUC 5</span>）
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">Day 1–4</div>
+        <div class="tl-content">
+          <span class="drug">5-FU</span> <span class="dose">1,000 mg/m²/日</span> <span class="route">持続点滴（24時間 × 4日）</span>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">毎週<br>Day 1,8,15</div>
+        <div class="tl-content">
+          <span class="drug">Cetuximab 維持</span> <span class="dose">250 mg/m²</span> <span class="route">IV 60分</span>（各コース中3回）
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-day">6コース後</div>
+        <div class="tl-content">
+          奏効・SD例 → <span class="drug">Cetuximab 250 mg/m² 週1回 単剤維持</span>（病勢進行まで）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">主な副作用とマネジメント</div>
+    <div class="ae-table">
+      <div class="ae-row ae-header">
+        <div class="ae-cell">副作用</div>
+        <div class="ae-cell" style="text-align:center">頻度</div>
+        <div class="ae-cell">対応・モニタリング</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">ざ瘡様皮疹（Cet）</div>
+        <div class="ae-cell ae-freq freq-high">80–90%</div>
+        <div class="ae-cell ae-manage">ミノサイクリン予防投与。Grade 3 → Cet投与延期＋全身抗菌薬。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">低Mg血症（Cet）</div>
+        <div class="ae-cell ae-freq freq-high">高（週毎測定必須）</div>
+        <div class="ae-cell ae-manage">毎週Mg測定。補充継続（IV/経口）。治療終了後も数週間持続することあり。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">インフュージョンリアクション（Cet）</div>
+        <div class="ae-cell ae-freq freq-mid">Grade 3–4: 約3%</div>
+        <div class="ae-cell ae-manage">初回が最多。エピネフリン準備。重篤時は永続中止。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">腎毒性（CDDP）</div>
+        <div class="ae-cell ae-freq freq-high">高</div>
+        <div class="ae-cell ae-manage">補液厳守・CCr確認。CCr &lt; 60 → CBDCAへ変更。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">口腔粘膜炎（5-FU）</div>
+        <div class="ae-cell ae-freq freq-high">30–50%</div>
+        <div class="ae-cell ae-manage">含嗽・口腔ケア。経管栄養検討。</div>
+      </div>
+      <div class="ae-row">
+        <div class="ae-cell ae-name">骨髄抑制</div>
+        <div class="ae-cell ae-freq freq-mid">中等度</div>
+        <div class="ae-cell ae-manage">血算定期確認（週1回目安）。FN対応準備。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box alert-amber">
+    <div class="alert-title">⚠ 現在の位置付け（2025年時点）</div>
+    KEYNOTE-048の結果によりPembrolizumab±PFが1次治療の標準となりつつある。ExtremeはPD-L1 CPS &lt; 1 でPembro単剤不適かつ免疫チェックポイント阻害薬使用不可例での選択肢。各症例でPD-L1検査結果と腎機能を踏まえ選択。
+  </div>
+  <div class="ref-box">Evidence: Vermorken JB et al. NEJM 2008 (EXTREME trial)</div>
+</div>
+
+</main>
+</div>
+
+<script>
+function showPanel(id) {
+  document.querySelectorAll('.regimen-panel').forEach(function(p) {
+    p.classList.remove('active');
+  });
+  document.querySelectorAll('.nav-btn').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  var panel = document.getElementById('panel-' + id);
+  if (panel) panel.classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>
